@@ -2,6 +2,12 @@
 
 Este projeto realiza análise exploratória e modelagem simples utilizando um dataset de produtos da Amazon, com visualização interativa via Streamlit.
 
+## Integrantes:
+- Bruno Melo
+- Daniel Menezes
+- Fernando Mota
+- Lucas Albino
+
 ## Estrutura
 
 - `data/amazon.csv`: dataset original.
