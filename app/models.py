@@ -9,14 +9,14 @@ from sklearn.model_selection import train_test_split
 
 def preparar_dados_regressao(df: pd.DataFrame) -> Tuple[np.ndarray, np.ndarray]:
     cols_x = [
-        "discounted_price_num",
-        "actual_price_num",
-        "discount_percentage_num",
-        "rating_count_num",
+        "preco_descontado",
+        "preco_original",
+        "desconto_percentual",
+        "qtde_avaliacoes",
     ]
-    dados = df[cols_x + ["rating_num"]].dropna()
+    dados = df[cols_x + ["nota_media"]].dropna()
     X = dados[cols_x].values
-    y = dados["rating_num"].values
+    y = dados["nota_media"].values
     return X, y
 
 

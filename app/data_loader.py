@@ -45,4 +45,14 @@ def load_clean_data(csv_path: str = "data/amazon.csv") -> pd.DataFrame:
     df["review_title"] = df["review_title"].astype(str)
     df["review_content"] = df["review_content"].astype(str)
 
+    df = df.rename(
+        columns={
+            "discounted_price_num": "preco_descontado",
+            "actual_price_num": "preco_original",
+            "discount_percentage_num": "desconto_percentual",
+            "rating_num": "nota_media",
+            "rating_count_num": "qtde_avaliacoes",
+        }
+    )
+
     return df

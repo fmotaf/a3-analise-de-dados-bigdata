@@ -36,8 +36,8 @@ def pagina_visao_geral(df: pd.DataFrame):
 
     col1, col2, col3 = st.columns(3)
     col1.metric("Nº de produtos", len(df))
-    col2.metric("Rating médio", f"{df['rating_num'].mean():.2f}")
-    col3.metric("Desconto médio (%)", f"{df['discount_percentage_num'].mean():.1f}")
+    col2.metric("Rating médio", f"{df['nota_media'].mean():.2f}")
+    col3.metric("Desconto médio (%)", f"{df['desconto_percentual'].mean():.1f}")
 
 
 def pagina_precos_descontos(df: pd.DataFrame):
@@ -47,14 +47,14 @@ def pagina_precos_descontos(df: pd.DataFrame):
     with col1:
         st.subheader("Distribuição de preços (com desconto)")
         fig, ax = plt.subplots()
-        sns.histplot(df["discounted_price_num"].dropna(), bins=20, ax=ax)
+        sns.histplot(df["preco_descontado"].dropna(), bins=20, ax=ax)
         ax.set_xlabel("Preço com desconto (₹)")
         st.pyplot(fig)
 
     with col2:
         st.subheader("Distribuição de descontos (%)")
         fig, ax = plt.subplots()
-        sns.histplot(df["discount_percentage_num"].dropna(), bins=20, ax=ax)
+        sns.histplot(df["desconto_percentual"].dropna(), bins=20, ax=ax)
         ax.set_xlabel("Desconto (%)")
         st.pyplot(fig)
 
@@ -127,8 +127,8 @@ def aplicar_filtros(df: pd.DataFrame) -> pd.DataFrame:
 
     rating_min = st.sidebar.slider("Rating mínimo", 0.0, 5.0, 0.0, 0.5)
 
-    preco_min, preco_max = float(df["discounted_price_num"].min()), float(
-        df["discounted_price_num"].max()
+    preco_min, preco_max = float(df["preco_descontado"].min()), float(
+        df["preco_descontado"].max()
     )
     faixa_preco = st.sidebar.slider(
         "Faixa de preço (com desconto)", preco_min, preco_max, (preco_min, preco_max)
@@ -138,10 +138,10 @@ def aplicar_filtros(df: pd.DataFrame) -> pd.DataFrame:
     if cat_sel != "(todas)":
         df_f = df_f[df_f["main_category"] == cat_sel]
 
-    df_f = df_f[df_f["rating_num"] >= rating_min]
+    df_f = df_f[df_f["nota_media"] >= rating_min]
     df_f = df_f[
-        (df_f["discounted_price_num"] >= faixa_preco[0])
-        & (df_f["discounted_price_num"] <= faixa_preco[1])
+        (df_f["preco_descontado"] >= faixa_preco[0])
+        & (df_f["preco_descontado"] <= faixa_preco[1])
     ]
 
     return df_f
