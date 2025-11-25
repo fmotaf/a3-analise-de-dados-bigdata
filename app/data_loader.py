@@ -1,5 +1,6 @@
-import pandas as pd
 from functools import lru_cache
+
+import pandas as pd
 
 
 def _to_number(value: str) -> float:
@@ -45,14 +46,3 @@ def load_clean_data(csv_path: str = "data/amazon.csv") -> pd.DataFrame:
     df["review_content"] = df["review_content"].astype(str)
 
     return df
-
-
-    "streamlit",
-    "pandas",
-    "numpy",
-    "matplotlib",
-    "seaborn",
-    "plotly",
-    "scikit-learn",
-    "textblob",
-    "nltk"
